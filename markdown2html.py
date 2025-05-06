@@ -1,30 +1,26 @@
 #!/usr/bin/python3
+"""
+Markdown to HTML converter - Initial script
+Handles argument count and input file existence.
+"""
 import sys
 import os
 
 
-# Check if the correct number of arguments is provided
-if len(sys.argv) < 3:
-    sys.stderr.write("Usage: ./markdown2html.py README.md README.html\n")
-    sys.exit(1)
+if __name__ == "__main__":
+    # Check if the number of arguments is less than 3 (script name + 2 args)
+    if len(sys.argv) < 3:
+        print("Usage: ./markdown2html.py README.md README.html",
+              file=sys.stderr)
+        sys.exit(1)
 
-input_file = sys.argv[1]
-output_file = sys.argv[2]
+    input_file = sys.argv[1]
+    output_file = sys.argv[2]
 
-# Check if the input Markdown file exists
-if not os.path.exists(input_file):
-    sys.stderr.write(f"Missing {input_file}\n")
-    sys.exit(1)
+    # Check if the markdown file exists
+    if not os.path.isfile(input_file):
+        print(f"Missing {input_file}", file=sys.stderr)
+        sys.exit(1)
 
-# Read markdown content
-with open(input_file, "r", encoding="utf-8") as md_file:
-    markdown_content = md_file.read()
-
-# Convert Markdown to HTML (basic conversion)
-html_content = f"<html>\n<body>\n{markdown_content}\n</body>\n</html>"
-
-# Write to the output HTML file
-with open(output_file, "w", encoding="utf-8") as html_file:
-    html_file.write(html_content)
-
-sys.exit(0)
+    # Script exits silently with 0 if all checks pass
+    sys.exit(0)
